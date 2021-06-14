@@ -8,8 +8,25 @@ services:
     volumes:
       - './services/users:/usr/src/app'
     ports:
-      - 5000:5000
+      - 5001:5000
     environment:
       - FLASK_APP=project/__init__.py
       - FLASK_DEBUG=1
       - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgresql://postgres:postgres@user-db:5432/user_dev
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@user-db:5432/user_test
+    depends_on:
+      - user-db
+    links:
+      - user-db
+
+  user-db:
+    container_name: user-db
+    build:
+      context: ./services/users/project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
