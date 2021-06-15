@@ -38,3 +38,7 @@ re-routed appropriately. This is often referred to as _service discovery_.
 ### Integration Test
 Often, when developing applications with microservice architecture, you cannot fully test out 
 all services until you deploy to a staging or production server. This takes much too long to get feedback. Fortunately, Docker helps to speed up this process by making it easier to link together small, independebt services locally.
+
+## [Flask Blueprints](https://flask.palletsprojects.com/en/2.0.x/blueprints/)
+They are self-contained components, used for encapsulating code, templates and static files
+
