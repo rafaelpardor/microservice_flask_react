@@ -6,6 +6,7 @@ from project import db
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 
+
 @users_blueprint.route('/users/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
@@ -25,6 +26,7 @@ def get_all_users():
     }
     return jsonify(response_object), 200
 
+
 @users_blueprint.route('/users', methods=['POST'])
 def add_user():
     post_data = request.get_json()
@@ -32,7 +34,7 @@ def add_user():
         'status': '',
         'message': ''
     }
-    if not post_data or post_data.get('username') == None:
+    if not post_data or post_data.get('username') is None:
         response_object['status'] = 'fail'
         response_object['message'] = 'Invalid payload.'
         return jsonify(response_object), 400
@@ -99,4 +101,3 @@ def index():
 
     users = User.query.all()
     return render_template('index.html', users=users)
-
