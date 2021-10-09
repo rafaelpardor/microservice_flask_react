@@ -1,5 +1,8 @@
 env
 .env
+.venv
+venv
 .dockerignore
 Dockerfile-dev
 Dockerfile-prod
+__pycache__
