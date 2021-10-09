@@ -4,16 +4,15 @@ services:
     container_name: users_api
     build:
       context: ./services/users
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile-prod
     volumes:
       - './services/users:/usr/src/app'
     ports:
-      - 5001:5000
+      - 5000:5000
     environment:
-      - FLASK_DEBUG=1
-      - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgresql://postgres_dev:postgres_dev@users_db:5432/user_dev
-      - DATABASE_TEST_URL=postgresql://postgres_dev:postgres_dev@users_db:5432/user_test
+      - APP_SETTINGS=project.config.ProductionConfig
+      - DATABASE_URL=postgresql://postgres:postgres@user-db:5432/user_prod
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@user-db:5432/user_test
     depends_on:
       - users_db
     links:
@@ -27,5 +26,5 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=postgres_dev
-      - POSTGRES_PASSWORD=postgres_dev
+      - POSTGRES_USER=postgres_prod
+      - POSTGRES_PASSWORD=postgres_prod

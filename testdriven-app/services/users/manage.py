@@ -17,7 +17,7 @@ def recreate_db():
     db.session.commit()
 
 
-@cli.command('test')
+@cli.command('tests')
 def test():
     """Runs the tests without code coverage."""
     tests = unittest.TestLoader().discover('project/tests', pattern='test*.py')
