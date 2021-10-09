@@ -41,7 +41,9 @@ class TestUserService(BaseTestCase):
             self.assertIn('success', data['status'])
 
     def test_add_user_invalid_json(self):
-        """Ensure error is thrown if the JSON object is empty."""
+        """
+        Ensure error is thrown if the JSON object is empty.
+        """
         with self.client:
             response = self.client.post(
                 '/users',
@@ -54,7 +56,9 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys(self):
-        """Ensure error is thrown if the JSON object does not have a username key."""
+        """
+        Ensure error is thrown if the JSON object does not have a username key
+        """
         with self.client:
             response = self.client.post(
                 '/users',
@@ -63,7 +67,7 @@ class TestUserService(BaseTestCase):
             )
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 400)
-            self.assertIn('Invalid payload.' , data['message'])
+            self.assertIn('Invalid payload.', data['message'])
             self.assertIn('fail', data['status'])
 
     def test_add_user_duplicate_email(self):
@@ -120,7 +124,7 @@ class TestUserService(BaseTestCase):
 
     def test_all_users(self):
         """Ensure get all users behaves correctly."""
-        add_user('johndoe' , 'johndoe@gmail.com')
+        add_user('johndoe', 'johndoe@gmail.com')
         add_user('johnwick', 'johnwick@gmail.com')
         with self.client:
             response = self.client.get('/users')
@@ -128,11 +132,47 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn('johndoe', data['data']['users'][0]['username'])
             self.assertIn('johnwick', data['data']['users'][1]['username'])
-            self.assertIn('johndoe@gmail.com', data['data']['users'][0]['email'])
-            self.assertIn('johnwick@gmail.com', data['data']['users'][1]['email'])
+            self.assertIn(
+                'johndoe@gmail.com', data['data']['users'][0]['email'])
+            self.assertIn(
+                'johnwick@gmail.com', data['data']['users'][1]['email'])
             self.assertIn('success', data['status'])
+
+    def test_index_no_users(self):
+        """
+        Ensure the index route behaves correctly when no users
+        have been added to the database.
+        """
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'<h1>All Users</h1>', response.data)
+        self.assertIn(b'<p>No users</p>', response.data)
+
+    def test_index_with_users(self):
+        """
+        Ensure the index route behaves correctly when users have
+        been added to the database.
+        """
+        add_user('johndoe', 'johndoe@gmail.com')
+        with self.client:
+            response = self.client.get('/')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<h1>All Users</h1>', response.data)
+            self.assertNotIn(b'<p>No users</p>', response.data)
+            self.assertIn(b'johndoe', response.data)
+
+    def test_index_submit_user(self):
+        with self.client:
+            response = self.client.post(
+                '/',
+                data=dict(username='johndoe', email='johndoe@email.com'),
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<h1>All Users</h1>', response.data)
+            self.assertNotIn(b'<p>No users</p>', response.data)
+            self.assertIn(b'johndoe', response.data)
 
 
 if __name__ == '__main__':
     unittest.main()
-

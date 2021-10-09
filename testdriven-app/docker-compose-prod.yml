@@ -7,12 +7,12 @@ services:
       dockerfile: Dockerfile-prod
     volumes:
       - './services/users:/usr/src/app'
-    ports:
-      - 5000:5000
+    expose:
+      - '5000'
     environment:
       - APP_SETTINGS=project.config.ProductionConfig
-      - DATABASE_URL=postgresql://postgres:postgres@user-db:5432/user_prod
-      - DATABASE_TEST_URL=postgresql://postgres:postgres@user-db:5432/user_test
+      - DATABASE_URL=postgresql://postgres_prod:postgres_prod@users_db:5432/user_prod
+      - DATABASE_TEST_URL=postgresql://postgres_prod:postgres_prod@users_db:5432/user_test
     depends_on:
       - users_db
     links:
@@ -28,3 +28,12 @@ services:
     environment:
       - POSTGRES_USER=postgres_prod
       - POSTGRES_PASSWORD=postgres_prod
+
+  nginx:
+    container_name: nginx
+    build: ./services/nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - users_api
