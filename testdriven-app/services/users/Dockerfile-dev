@@ -9,10 +9,10 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY ./requirements-dev.txt /usr/src/app/requirements-dev.txt
-COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+COPY ./entrypoint-dev.sh /usr/src/app/entrypoint-dev.sh
 
 RUN pip install -r requirements-dev.txt --quiet
 
 COPY . /usr/src/app
 
-CMD ["bash", "./entrypoint.sh"]
+CMD ["bash", "./entrypoint-dev.sh"]
