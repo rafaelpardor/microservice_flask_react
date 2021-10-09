@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "Wating for postgres..."
-while ! nc -z user-db 5432; do
+while ! nc -z users_db 5432; do
   echo "Reaching to database..."
   sleep 0.5
 done
 echo "Connected to database."
 
-gunicorn -b 0.0.0.0 manage:app
+gunicorn --bind 0.0.0.0:5000 manage:app
