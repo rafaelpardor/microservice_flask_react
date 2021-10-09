@@ -1,5 +1,7 @@
 # Microservices with Flask, React and Docker
 
+[![Build Status](https://travis-ci.org/rafaelpardor/testdriven-app.svg?branch=master)](https://travis-ci.org/rafaelpardor/testdriven-app)
+
 Microservices architectures provides a means of breaking apart large applications unto 
 smaller services that interact and communicate with each another. This communication
 between the services usually happens over a network connection through HTTP calls. 
