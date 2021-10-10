@@ -1,6 +1,6 @@
 # Microservices with Flask, React and Docker
 
-[![Build Status](https://travis-ci.org/rafaelpardor/testdriven-app.svg?branch=master)](https://travis-ci.org/rafaelpardor/testdriven-app)
+[![Build Status](https://app.travis-ci.com/rafaelpardor/testdriven-app.svg?branch=master)](https://app.travis-ci.com/rafaelpardor/testdriven-app)
 
 ## Commands to run application
 
@@ -89,5 +89,5 @@ get feedback. Fortunately, Docker helps to speed up this process by making it ea
 together small, independebt services locally.
 
 ## [Flask Blueprints](https://flask.palletsprojects.com/en/2.0.x/blueprints/)
-They are self-contained components, used for encapsulating code, templates and static files
 
+They are self-contained components, used for encapsulating code, templates and static files
