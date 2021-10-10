@@ -1,6 +1,6 @@
 # Microservices with Flask, React and Docker
 
-[![Build Status](https://travis-ci.org/rafaelpardor/testdriven-app.svg?branch=master)](https://travis-ci.org/rafaelpardor/testdriven-app)
+[![Build Status](https://travis-ci.org/rafaelpardor/testdriven-app.svg?branch=develop)](https://travis-ci.org/rafaelpardor/testdriven-app)
 
 ## Commands to run application
 
