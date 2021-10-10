@@ -1,8 +1,0 @@
-env
-.env
-.venv
-venv
-__pycache__/
-*.swp
-htmlcov/
-.coverage
