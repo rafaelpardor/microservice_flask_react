@@ -1,5 +1,33 @@
 # Microservices with Flask, React and Docker
 
+[![Build Status](https://travis-ci.org/rafaelpardor/testdriven-app.svg?branch=develop)](https://travis-ci.org/rafaelpardor/testdriven-app)
+
+## Commands to run application
+
+```bash
+docker-compose -f docker-compose.yaml up --build # Run the app
+docker-compose -f docker-compose.yaml \
+  run users python manage.py recreate_db # Run database
+docker-compose -f docker-compose.yaml \
+  run users python manage.py tests # Run tests
+docker-compose -f docker-compose.yaml \
+  run users python manage.py seed_db
+docker-copmose -f docker-compose.yaml \
+  run users flake8 project # Run linting
+docker-compose -f docker-compose.yml \
+  run users python manage.py cov # view code coverage
+
+find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf # clean
+```
+
+## Deployment
+
+With the routes up and tested, let's get this app deployed
+
+```bash
+docker-machine create --driver amazonec2 testdriven-prod
+```
+
 Microservices architectures provides a means of breaking apart large applications unto 
 smaller services that interact and communicate with each another. This communication
 between the services usually happens over a network connection through HTTP calls. 
