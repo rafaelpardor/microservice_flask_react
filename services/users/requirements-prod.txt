@@ -8,13 +8,6 @@ MarkupSafe==2.0.1
 psycopg2-binary==2.8.6
 SQLAlchemy==1.4.18
 Werkzeug==2.0.1
-<<<<<<< HEAD
 gunicorn==19.7.1
-=======
-<<<<<<<< HEAD:testdriven-app/services/users/requirements-dev.txt
 coverage==6.0.1 
-flake8==3.9.2
-========
 gunicorn==19.7.1
->>>>>>>> develop:services/users/requirements-prod.txt
->>>>>>> develop
