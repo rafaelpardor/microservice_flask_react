@@ -3,10 +3,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
-<<<<<<< HEAD
-=======
 from flask_cors import CORS
->>>>>>> master
 
 db = SQLAlchemy()
 toolbar = DebugToolbarExtension()
