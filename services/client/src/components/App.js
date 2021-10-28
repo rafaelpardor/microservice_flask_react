@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { Component } from 'react';
+import { UsersList } from './UsersList';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       users: []
     }
   }
+
   componentDidMount() {
     this.getUsers();
   }
@@ -22,7 +24,7 @@ class App extends Component {
   getUsers() {
     axios.get(`${process.env.REACT_APP_USERS_SERVICE}/users`)
     .then((res) => { this.setState({ users: res.data.data.users }); })
-    .catch((err) => { console.error(err); });
+    .catch((err) => { console.error("Error: " + err); });
   }
 
   render() {
@@ -30,17 +32,7 @@ class App extends Component {
       <div>
         <h1>All users</h1>
         <br/>
-        {
-          this.state.users.map(user => {
-            return (
-              <p
-                key={user.id}
-              >
-                 {user.id}. <i>{user.username}</i>, {user.email} <br/>
-              </p>
-            )
-          })
-        }
+        <UsersList users={this.state.users} />
       </div>
     )  
   }
